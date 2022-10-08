@@ -1,2 +1,4 @@
-package racingcar;public class NameLengthValidTest {
+package racingcar;
+
+public class NameLengthValidTest {
 }

@@ -1,2 +1,5 @@
-package racingcar;public enum CarCondition {
+package racingcar;
+
+public enum CarCondition {
+    Stop, Forword
 }
