@@ -9,10 +9,10 @@ public class ValidCheck {
         return false;
     }
 
-    public static boolean inputNameSizeCheck(Cars cars) {
+    public static boolean inputNamesSizeCheck(String[] CarName) {
 
-        for (int i = 0; i < cars.getCount(); i++) {
-            if (cars.getRacingCar().get(i).getCarName().length() > 5)
+        for (int i = 0; i < CarName.length; i++) {
+            if (CarName[i].length() > 5)
                 return false;
         }
         return true;
@@ -27,5 +27,17 @@ public class ValidCheck {
             }
         }
         return true;
+    }
+
+    public static void CheckInputNumber(String inputNumber) {
+        if (!ValidCheck.inputNumberIsNUmber(inputNumber)) {
+            throw new IllegalArgumentException("[ERROR] 숫자를 입력하세요");
+        }
+    }
+
+    public static void checkInputNames(String[] inputCars) {
+        if (!ValidCheck.inputNamesSizeCheck(inputCars)) {
+            throw new IllegalArgumentException("[ERROR] 자동차 이름을 너무 길게 입력했습니다.");
+        }
     }
 }

@@ -10,11 +10,9 @@ public class Cars {
     private final List<Car> RacingCar;
     private int count = 0;
 
-    public Cars(String[] inputcars) {
-
-
-        this.RacingCar = mapCars(inputcars);
-
+    public Cars(String[] InputCars) {
+        ValidCheck.checkInputNames(InputCars);
+        this.RacingCar = mapCars(InputCars);
     }
 
     public List<Car> getRacingCar() {
@@ -23,6 +21,10 @@ public class Cars {
 
     public int getCount() {
         return count;
+    }
+
+    public int getCountPlusOne() {
+        return count+1;
     }
 
     public void setCount(int count) {
@@ -34,7 +36,7 @@ public class Cars {
         List<Car> cars = new ArrayList<>();
         for (int i = 0; i < inputcars.length; i++) {
             cars.add(new Car(inputcars[i]));
-            this.count = this.count + 1;
+            this.count = getCountPlusOne();
         }
         return cars;
     }

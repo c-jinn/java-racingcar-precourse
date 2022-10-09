@@ -8,11 +8,6 @@ public class Application {
 
     private static void RaceStart() {
         Race race= new Race();
-
         race.start();
-
-
-
-
     }
 }

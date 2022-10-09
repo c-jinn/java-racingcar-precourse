@@ -2,18 +2,18 @@ package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.max;
 
 public class Race {
     private String inputNames;
     private String inputNumber;
 
-    private Cars racingcars;
+    private Cars racingCars;
 
     public void start() {
-
 
         InsertNames();
         InsertTryingNumber();
@@ -22,59 +22,11 @@ public class Race {
 
     }
 
-    private void RacingResult() {
-
-        int MaxNumber = 0;
-        List<String> RaceResult = new ArrayList<String>();
-        String ResultString = "최종 우승자 : ";
-        for (int i = 0; i < racingcars.getCount(); i++) {
-            if (MaxNumber < racingcars.getRacingCar().get(i).getPosition())
-                MaxNumber = racingcars.getRacingCar().get(i).getPosition();
-        }
-        for (int i = 0; i < racingcars.getCount(); i++) {
-            if (MaxNumber == racingcars.getRacingCar().get(i).getPosition())
-                RaceResult.add(racingcars.getRacingCar().get(i).getCarName());
-
-        }
-
-
-        for (int i = 0; i < RaceResult.size(); i++) {
-            if (i > 0) {
-                ResultString += ", ";
-            }
-
-            ResultString += RaceResult.get(i);
-
-
-        }
-        System.out.println(ResultString);
-
-    }
-
-    private void InsertTryingNumber() {
-        System.out.println("시도할 회수");
-        inputNumber = Console.readLine();
-
-        try {
-            if (!ValidCheck.inputNumberIsNUmber(inputNumber)) {
-                throw new IllegalArgumentException("[ERROR] 숫자를 입력하세요");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-            InsertTryingNumber();
-
-        }
-    }
-
     private void InsertNames() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분");
         inputNames = Console.readLine();
-        racingcars = new Cars(inputNames.split(","));
-
         try {
-            if (!ValidCheck.inputNameSizeCheck(racingcars)) {
-                throw new IllegalArgumentException("[ERROR] 자동차 이름을 너무 길게 입력했습니다.");
-            }
+            racingCars = new Cars(inputNames.split(","));
 
         } catch (IllegalArgumentException e) {
             System.out.println(e);
@@ -82,17 +34,27 @@ public class Race {
         }
     }
 
+    private void InsertTryingNumber() {
+        System.out.println("시도할 회수");
+        inputNumber = Console.readLine();
+        try {
+            ValidCheck.CheckInputNumber(inputNumber);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+            InsertTryingNumber();
+
+        }
+    }
+
+
     private void Racing() {
 
         System.out.println("");
         System.out.println("실행 결과");
         for (int i = 0; i < Integer.parseInt(inputNumber); i++) {
-            racingcars.run();
-
-            for (int j = 0; j < racingcars.getCount(); j++) {
-
-                System.out.println(racingcars.getRacingCar().get(j).getCarName() + " : " + PositionToHipen(racingcars.getRacingCar().get(j).getPosition()));
-
+            racingCars.run();
+            for (int j = 0; j < racingCars.getCount(); j++) {
+                System.out.println(racingCars.getRacingCar().get(j).getCarName() + " : " + PositionToHipen(racingCars.getRacingCar().get(j).getPosition()));
             }
             System.out.println("");
         }
@@ -104,5 +66,45 @@ public class Race {
             hipens += "-";
         }
         return hipens;
+    }
+
+    private void RacingResult() {
+
+        int MaxPosition = GetMaxPosition();
+        List<String> RaceResult = GetWinnerName(MaxPosition);
+        String ResultString = "최종 우승자 : ";
+        ResultString += WinnerToString(RaceResult);
+        System.out.println(ResultString);
+    }
+
+    private String WinnerToString(List<String> raceResult) {
+        String returnString = "";
+        for (int i = 0; i < raceResult.size(); i++) {
+            if (i > 0) {
+                returnString += ", ";
+            }
+            returnString += raceResult.get(i);
+        }
+        return returnString;
+    }
+
+    private List<String> GetWinnerName(int maxPosition) {
+        List<String> RaceResult = new ArrayList<String>();
+        for (int i = 0; i < racingCars.getCount(); i++) {
+            if (maxPosition == racingCars.getRacingCar().get(i).getPosition())
+                RaceResult.add(racingCars.getRacingCar().get(i).getCarName());
+        }
+
+        return RaceResult;
+    }
+
+    private int GetMaxPosition() {
+
+
+        int MaxNumber = 0;
+        for (int i = 0; i < racingCars.getCount(); i++)
+            MaxNumber = max(MaxNumber, racingCars.getRacingCar().get(i).getPosition());
+
+        return MaxNumber;
     }
 }
