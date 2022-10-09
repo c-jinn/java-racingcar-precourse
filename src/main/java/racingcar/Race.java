@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.max;
+import static racingcar.PrintStrings.*;
 
 public class Race {
 
@@ -26,7 +27,7 @@ public class Race {
     }
 
     private void InsertNames() {
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분");
+        System.out.println(REQUEST_CAR_NAMES_WITH_DELIMITER);
         RaceInput = new ConsoleInput();
         RaceInput.setCarNames(Console.readLine());
         try {
@@ -39,7 +40,7 @@ public class Race {
     }
 
     private void InsertTryingNumber() {
-        System.out.println("시도할 회수");
+        System.out.println(REQUEST_NUMBER_OF_TRYING);
         RaceInput.setTryingNumber(Console.readLine());
         try {
             ValidCheck.CheckInputNumber(RaceInput.getTryingNumber());
@@ -53,8 +54,7 @@ public class Race {
 
     private void Racing() {
 
-        System.out.println("");
-        System.out.println("실행 결과");
+        System.out.println(RACING_RESULT);
         for (int tryNum = 0; tryNum < RaceInput.getTryingNumberToInt(); tryNum++) {
             racingCars.run();
             for (int carNum = 0; carNum < racingCars.getCarCount(); carNum++)
@@ -76,7 +76,7 @@ public class Race {
 
         int MaxPosition = GetMaxPosition();
         List<String> RaceResult = GetWinnerName(MaxPosition);
-        String ResultString = "최종 우승자 : ";
+        String ResultString = FINAL_WINNER;
         ResultString += WinnerToString(RaceResult);
         System.out.println(ResultString);
     }

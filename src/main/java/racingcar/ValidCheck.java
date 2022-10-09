@@ -1,6 +1,7 @@
 package racingcar;
 
 import static java.lang.Character.isDigit;
+import static racingcar.PrintStrings.*;
 
 public class ValidCheck {
 
@@ -24,14 +25,14 @@ public class ValidCheck {
 
     public static void CheckInputNumber(String inputNumber) {
         if (!ValidCheck.inputNumberIsNUmber(inputNumber)) {
-            throw new IllegalArgumentException("[ERROR] 숫자를 입력하세요");
+            throw new IllegalArgumentException(ERROR_CHECK_NUMBER_MESSAGE);
         }
     }
 
 
     public static void checkInputName(String carName) {
         if (!ValidCheck.SizeCheck(carName)) {
-            throw new IllegalArgumentException("[ERROR] 자동차 이름을 너무 길게 입력했습니다.");
+            throw new IllegalArgumentException(ERROR_CHECK_CAR_NAME_MESSAGE);
         }
     }
 
