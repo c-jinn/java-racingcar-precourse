@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Cars {
 
-    public final List<Car> RacingCar;
-    private int count=0;
+    private final List<Car> RacingCar;
+    private int count = 0;
 
     public Cars(String[] inputcars) {
 
@@ -34,14 +34,14 @@ public class Cars {
         List<Car> cars = new ArrayList<>();
         for (int i = 0; i < inputcars.length; i++) {
             cars.add(new Car(inputcars[i]));
-            this.count = this.count +  1;
+            this.count = this.count + 1;
         }
         return cars;
     }
 
     public void run() {
         for (int i = 0; i < RacingCar.size(); i++) {
-            if(RacingCar.get(i).run(Randoms.pickNumberInRange(0,9)) == CarCondition.Forword){
+            if (RacingCar.get(i).run(Randoms.pickNumberInRange(0, 9)) == CarCondition.Forword) {
                 RacingCar.get(i).goForward();
             }
         }
