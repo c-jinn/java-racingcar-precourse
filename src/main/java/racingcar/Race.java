@@ -2,6 +2,10 @@ package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import javax.xml.transform.Result;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Race {
     private String inputNames;
     private String inputNumber;
@@ -13,7 +17,37 @@ public class Race {
 
         InsertNames();
         InsertTryingNumber();
-        run();
+        Racing();
+        RacingResult();
+
+    }
+
+    private void RacingResult() {
+
+        int MaxNumber = 0;
+        List<String> RaceResult = new ArrayList<String>();
+        String ResultString = "최종 우승자 : ";
+        for (int i = 0; i < racingcars.getCount(); i++) {
+            if(MaxNumber < racingcars.getRacingCar().get(i).getPosition())
+                MaxNumber = racingcars.getRacingCar().get(i).getPosition();
+        }
+        for (int i = 0; i < racingcars.getCount(); i++) {
+            if(MaxNumber == racingcars.getRacingCar().get(i).getPosition())
+                RaceResult.add(racingcars.getRacingCar().get(i).getCarName());
+
+        }
+
+
+        for (int i = 0; i < RaceResult.size(); i++) {
+            if (i > 0 ) {
+                ResultString += ", ";
+            }
+
+            ResultString += RaceResult.get(i);
+
+
+        }
+        System.out.println(ResultString);
 
     }
 
@@ -27,6 +61,7 @@ public class Race {
             }
         }
         catch(IllegalArgumentException e ){
+            System.out.println(e);
             InsertTryingNumber();
 
         }
@@ -48,7 +83,7 @@ public class Race {
         }
     }
 
-    private void run() {
+    private void Racing() {
 
         System.out.println("");
         System.out.println("실행 결과");
@@ -57,7 +92,7 @@ public class Race {
 
             for (int j = 0; j < racingcars.getCount(); j++) {
 
-                System.out.println(racingcars.getRacingCar().get(j).getCarName() + ":" + PositionToHipen(racingcars.getRacingCar().get(j).getPosition()) );
+                System.out.println(racingcars.getRacingCar().get(j).getCarName() + " : " + PositionToHipen(racingcars.getRacingCar().get(j).getPosition()) );
 
             }
             System.out.println("");
