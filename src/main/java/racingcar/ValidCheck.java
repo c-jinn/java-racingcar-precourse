@@ -3,21 +3,14 @@ package racingcar;
 import static java.lang.Character.isDigit;
 
 public class ValidCheck {
+
+
+    public static final int CAR_NAME_MAX_SIZE = 5;
+
     public static boolean SizeCheck(String inputName) {
-        if (inputName.length() <= 5)
+        if (inputName.length() <= CAR_NAME_MAX_SIZE)
             return true;
         return false;
-    }
-
-    public static boolean inputNamesSizeCheck(String[] CarName) {
-
-        for (int i = 0; i < CarName.length; i++) {
-            if (CarName[i].length() > 5)
-                return false;
-        }
-        return true;
-
-
     }
 
     public static boolean inputNumberIsNUmber(String inputNumber) {
@@ -35,9 +28,11 @@ public class ValidCheck {
         }
     }
 
-    public static void checkInputNames(String[] inputCars) {
-        if (!ValidCheck.inputNamesSizeCheck(inputCars)) {
+
+    public static void checkInputName(String carName) {
+        if (!ValidCheck.SizeCheck(carName)) {
             throw new IllegalArgumentException("[ERROR] 자동차 이름을 너무 길게 입력했습니다.");
         }
     }
+
 }

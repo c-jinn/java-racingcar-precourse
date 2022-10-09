@@ -3,7 +3,8 @@ package racingcar;
 public class Car {
 
     private final String CarName;
-    int Position;
+    private int Position;
+    public static final int GO_FORWORD_MIN_NUMBER = 4;
 
     public int getPosition() {
         return Position;
@@ -14,6 +15,8 @@ public class Car {
     }
 
     public Car(String carName) {
+
+        ValidCheck.checkInputName(carName);
         this.CarName = carName;
 
         this.setPosition(0);
@@ -26,7 +29,7 @@ public class Car {
 
 
     public CarCondition run(int conditionValue) {
-        if (conditionValue >= 4)
+        if (conditionValue >= GO_FORWORD_MIN_NUMBER)
             return CarCondition.Forword;
         return CarCondition.Stop;
     }
